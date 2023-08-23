@@ -27,11 +27,7 @@ Route::controller(StripePaymentController::class)->group(function(){
 
 ///Paypal Payment
 
-Route::controller(PaymentController::class)
-    ->prefix('paypal')
-    ->group(function () {
-        Route::view('payment', 'paypal.index')->name('create.payment');
-        Route::get('handle-payment', 'handlePayment')->name('make.payment');
-        Route::get('cancel-payment', 'paymentCancel')->name('cancel.payment');
-        Route::get('payment-success', 'paymentSuccess')->name('success.payment');
-    });
+Route::get('create-transaction', [PayPalController::class, 'createTransaction'])->name('createTransaction');
+Route::get('process-transaction', [PayPalController::class, 'processTransaction'])->name('processTransaction');
+Route::get('success-transaction', [PayPalController::class, 'successTransaction'])->name('successTransaction');
+Route::get('cancel-transaction', [PayPalController::class, 'cancelTransaction'])->name('cancelTransaction');

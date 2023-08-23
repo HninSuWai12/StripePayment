@@ -1,68 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
- <title>Laravel Paypal</title>
- <style type="text/css">
- *{
-  box-sizing: border-box;
- }
- body{
-  display: flex;
-  background: #c3c3c3;
-  min-height: 100vh;
-  justify-content: center;
-  align-items: center;
- }
- .pay-area{
-  display: block;
-  width: 300px;
-  padding: 35px;
-  background: #ffffff;
- }
- input{
-  display: block;
-  width: 100%;
-  padding: 5px 15px;
- }
- button{
-  padding: 5px 10px;
-  background: #3c3c3c;
-  cursor: pointer;
-  color: #ffffff;
- }
- .m-2{
-  margin: 20px auto;
-  display: block;
- }
- .error{
-  color: red;
-  font-size: small;
- }
- .success{
-  color: green;
- }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
- <section class="pay-area">
-  <div>
-   <img height="60" src="{{ asset('paypal-logo.png') }}">
-   @if (session('error') || session('success'))
-   <p class="{{ session('error') ? 'error':'success' }}">
-    {{ session('error') ?? session('success') }}
-   </p>
-   @endif
-   <form method="POST" action="{{ route('processTransaction') }}">
+   <form action="{{route('processTransaction')}}" method="GET">
     @csrf
-    <div class="m-2">
-     <input type="text" name="amount" placeholder="Amount">
-     @if ($errors->has('amount'))
-     <span class="error"> {{ $errors->first('amount') }} </span>
-     @endif
-    </div>
-    <button>Pay Now</button>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-center uppercase mb-12 bg-gradient-to-r from-indigo-400 via-purple-500 to-indigo-600 bg-clip-text text-transparent transform -rotate-2">Make A Payment</h1>
+            @if (session()->has('success'))
+                <div class="alert alert-success">
+                    {{ session()->get('success') }}
+                </div>
+            @endif
+            <center>
+               <button type="submitgb">Pay with PayPal👉</button>
+            </center>
+        </div>
+    </div> 
    </form>
-  </div>
- </section>
 </body>
 </html>
